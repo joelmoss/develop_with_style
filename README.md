@@ -1,6 +1,33 @@
 # Develop With Style
 
-Enjoy writing CSS in your Rails application and Develop With Style!
+> Enjoy writing CSS in your Rails application and Develop With Style!
+
+Style your Rails views with [CSS modules](https://github.com/css-modules/css-modules), and your layouts with global CSS. Just create a stylesheet and decorate the HTML, then  you're good to go.
+
+ - **No need for long class naming or having to decide on naming conventions such as BEM, etc.**
+ - **Each view has its own CSS module, so no need to worry about style or naming conflicts.**
+ - **The required stylesheets are automatically included.**
+ - **Optionally define global styles in your layout stylesheet.**
+
+For locally styled views (CSS Modules)...
+
+```css
+/* app/javascript/pages/home.module.css */
+.main {
+  background-color: red;
+}
+```
+
+```ruby
+<!-- app/views/pages/home.html.erb -->
+<div class="<%= style 'main' %>">
+  <h1>Hello world</h1>
+</div>
+```
+
+You can do the same anywhere else, even using the same class names, but because a CSS module is used for each, we have no fear of style or class naming conflicts.
+
+No fighting with stylesheet includes; just drop the `developed_with_style` helper in your layout and the Gem will include whatever you need.
 
 ## Installation
 
@@ -55,6 +82,14 @@ So if you have a view at `pages/home.html.erb`, with the following contenets:
 </div>
 ```
 
+Create a CSS module file at `app/javascript/pages/home.module.css`:
+
+```css
+.main {
+  background-color: red;
+}
+```
+
 You can style any HTML element as follows:
 
 ```ruby
@@ -63,7 +98,15 @@ You can style any HTML element as follows:
 </div>
 ```
 
-This will automatically include the stylesheet with the same path and name as the view using the `developed_with_style` helper above.
+Which will be rendered something like this:
+
+```ruby
+<div class="de5gdrhj56jkU8J034gsdd__main">
+  <h1>Hello world</h1>
+</div>
+```
+
+This will automatically include the stylesheet with the same path and name as the view when using the `developed_with_style` helper above.
 
 For additional syntactic sugar, you can pass a block and the HTML `div` tag will be rendered for you.
 
