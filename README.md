@@ -20,7 +20,66 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+First, run the installer:
+
+    $ bin/rails develop_with_style
+
+This will set everything up and add a couple of example CSS files:
+
+ - `app/javascript/packs/layouts/application.css`
+ - `app/javascript/packs/pages/home.module.scss`
+
+DevelopWithStyle groups your stylesheets in to two types that will be very familiar to you; layouts and views. Layouts correspond to your Rails layouts, and Views correspond to your Rails views - obviously ;)
+
+These two types also allow us to define global and local styles. So everything in your layout stylesheets will be global, and everything in your view stylesheets will be local using [CSS modules](https://github.com/css-modules/css-modules).
+
+### Helpers
+
+DevelopWithStyle comes with two little helpers to including and using layout and view styles.
+
+#### `developed_with_style`
+
+If you successfully ran the installer above, then this helper will already have been inserted in to the `<head>` of your `app/views/layouts/application` layout file.
+
+The `developed_with_style` helper will first include the stylesheet that matches the name of the layout, then any view stylesheets that have been defined using the `style` helper.
+
+#### `style`
+
+The `style` helper can be used to insert the CSS class name.
+
+So if you have a view at `pages/home.html.erb`, with the following contenets:
+
+```ruby
+<div>
+  <h1>Hello world</h1>
+</div>
+```
+
+You can style any HTML element as follows:
+
+```ruby
+<div class="<%= style 'main' %>">
+  <h1>Hello world</h1>
+</div>
+```
+
+This will automatically include the stylesheet with the same path and name as the view using the `developed_with_style` helper above.
+
+For additional syntactic sugar, you can pass a block and the HTML `div` tag will be rendered for you.
+
+```ruby
+<%= style 'main' do %>
+  <h1>Hello world</h1>
+<% end %>
+```
+
+Pass the `:tag_name` option to specify which HTML tag you want to use:
+
+```ruby
+<%= style 'main', tag_name: :span do %>
+  <h1>Hello world</h1>
+<% end %>
+```
 
 ## Development
 
