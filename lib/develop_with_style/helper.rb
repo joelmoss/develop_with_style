@@ -10,7 +10,7 @@ module DevelopWithStyle::Helper
   end
 
   def developed_with_style
-    return if @css_modules.blank?
+    @css_modules ||= []
 
     asset = "#{@virtual_path}#{compute_asset_extname(@virtual_path, type: :stylesheet)}"
     Webpacker.manifest.lookup(asset) && @css_modules.unshift(@virtual_path)
