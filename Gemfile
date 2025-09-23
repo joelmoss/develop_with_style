@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'puma'
-gem 'rails', '~> 8.0.2', '>= 8.0.2.1'
+gem 'rails', '~> 8.0.3'
 gem 'sqlite3', '>= 2.1'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
